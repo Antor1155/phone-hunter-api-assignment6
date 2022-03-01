@@ -28,8 +28,8 @@ const displayData = data => {
         const div = document.createElement('div');
         div.classList.add('col-md-4');
         div.innerHTML = `
-            <div class="card m-5" style="width: 18rem;">
-                <img src="${element.image}" class="card-img-top" alt="image of a phone">
+            <div class="card m-5 text-center" style="width: 18rem;">
+                <img src="${element.image}" class="card-img-top w-50 mx-auto" alt="image of a phone">
                 <div class="card-body">
                     <h5 class="card-title">${element.phone_name}</h5>
                     <p class="card-text">${element.brand}</p>
