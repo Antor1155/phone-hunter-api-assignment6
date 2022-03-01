@@ -26,6 +26,7 @@ const displayData = data => {
     // showing the data in ui 
     allPhone.forEach(element => {
         const div = document.createElement('div');
+        div.classList.add('col-md-4');
         div.innerHTML = `
             <div class="card m-5" style="width: 18rem;">
                 <img src="${element.image}" class="card-img-top" alt="image of a phone">
@@ -58,8 +59,7 @@ const makeDescription = data => {
             <img src="${info.image}" alt="image of a phone">
             <h2>${info.name}</h2>
             <p>${info.releaseDate ? info.releaseDate : ""}</p>
-            <ul id="mainfeatures"><h3>main features</h3>
-                <li>memory:</li>
+            <ul id="mainfeatures" class ="list-unstyled"><h3>main features</h3>
             </ul>
         </div> 
         `;
