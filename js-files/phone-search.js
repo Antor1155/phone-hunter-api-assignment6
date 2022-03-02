@@ -18,7 +18,16 @@ const searchFinished = () => {mainPresent(); spinnerOff();}
 // description section 
 const descriptionSection = document.getElementById("description");
 
+// toggle section to show or hide the error message
+const errorMessage = document.getElementById('errorMessageSection');
+const errorPresent =() => {errorMessage.style.display = "block";} 
+const errorAbsent =() => {errorMessage.style.display = "none";} 
+errorAbsent();
+
+
+// ***************************************************************************
 // ********* searching and showing all the products starts form here ********* 
+// ***************************************************************************
 
 // searchbox and getting the values on click
 let searchValue = null;
@@ -26,8 +35,9 @@ const searchButton = document.getElementById("search-button");
 
 searchButton.addEventListener('click', function(){
     // function to start spinner and hide display 
+    errorAbsent();
     searchOn();
-    descriptionSection.textContent ='';
+    descriptionSection.textContent =' ';
     const searchField = document.getElementById("search-field");
 
     searchValue = searchField.value;
@@ -42,22 +52,19 @@ const fetchOnSearch = phoneName => {
     fetch(phoneUrl).then( url => url.json()).then(data => displayData(data));
 }
 
- // all phones from search in the all phone variable in array format 
+ // all phones from search in the allphone variable is in array format 
 const displayData = data => {
-    const allPhone = data.data;
+    const allPhone = data.data.slice(0,20);
 
     // ***** if the product not found ******
     if(!data.status){
-        mainSection.innerHTML = `
-            <h3 class=" mt-5 text-center"> <span class ="text-danger" >!!!!! <span>no phone found </h3>
-            <img src="images/notFound.jpg" alt="image of info not found" class="w-50 mx-auto d-block">
-        `;
+        errorPresent();
+        mainAbsent();
         searchFinished();
-        return;
-    };
+        return;};
 
     const cardsSection = document.getElementById('cards');
-    cardsSection.textContent = '';
+    cardsSection.textContent = ' ';
 
     // showing the data in ui 
     allPhone.forEach(element => {
