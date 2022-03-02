@@ -97,13 +97,16 @@ const makeDescription = data => {
     // console.log(data.data.name);
     const info = data.data;
     const mainFeatures = data.data.mainFeatures;
+
     descriptionSection.innerHTML = `
         <div>
             <img src="${info.image}" alt="image of a phone">
             <h2>${info.name}</h2>
             <p>${info.releaseDate ? info.releaseDate : ""}</p>
             <ul id="mainfeatures" class ="list-unstyled"><h3>main features</h3>
+
             </ul>
+            <p>${info.others ? 'others: ' + Object.values(info.others): '' }</p>
         </div> 
         `;
 
