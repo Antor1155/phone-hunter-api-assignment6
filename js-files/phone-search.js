@@ -118,5 +118,8 @@ const makeDescription = data => {
         ul.appendChild(li);
     }
 
+    // scrool to the top to screen 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
 
 }
