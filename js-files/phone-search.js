@@ -8,8 +8,8 @@ spinnerOff();
 
 // main body show and hide while searching 
 const mainSection =document.getElementById('main-body');
-const mainPresent =() => {mainSection.style.display = "block";} 
-const mainAbsent =() => {mainSection.style.display = "none";} 
+const mainPresent =() => {mainSection.style.display = "block"; console.log("main present is working")} 
+const mainAbsent =() => {mainSection.style.display = "none"; console.log('main absent is working');} 
 
 // function to show while searching and on search-done 
 const searchOn = () => {mainAbsent(); spinnerOn();}
@@ -55,12 +55,13 @@ const fetchOnSearch = phoneName => {
  // all phones from search in the allphone variable is in array format 
 const displayData = data => {
     const allPhone = data.data.slice(0,20);
-
+    console.log(data.status);
     // ***** if the product not found ******
     if(!data.status){
         errorPresent();
-        mainAbsent();
+        console.log('main should be absent here');
         searchFinished();
+        mainAbsent();
         return;};
 
     const cardsSection = document.getElementById('cards');
