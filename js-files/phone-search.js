@@ -8,8 +8,8 @@ spinnerOff();
 
 // main body show and hide while searching 
 const mainSection =document.getElementById('main-body');
-const mainPresent =() => {mainSection.style.display = "block"; console.log("main present is working")} 
-const mainAbsent =() => {mainSection.style.display = "none"; console.log('main absent is working');} 
+const mainPresent =() => {mainSection.style.display = "block";} 
+const mainAbsent =() => {mainSection.style.display = "none"; } 
 
 // function to show while searching and on search-done 
 const searchOn = () => {mainAbsent(); spinnerOn();}
@@ -55,11 +55,9 @@ const fetchOnSearch = phoneName => {
  // all phones from search in the allphone variable is in array format 
 const displayData = data => {
     const allPhone = data.data.slice(0,20);
-    console.log(data.status);
     // ***** if the product not found ******
     if(!data.status){
         errorPresent();
-        console.log('main should be absent here');
         searchFinished();
         mainAbsent();
         return;};
@@ -77,7 +75,7 @@ const displayData = data => {
                 <div class="card-body">
                     <h5 class="card-title">${element.phone_name}</h5>
                     <p class="card-text">${element.brand}</p>
-                    <button onclick="getDescription('${element.slug}')" class="btn btn-primary">Go somewhere</button>
+                    <button onclick="getDescription('${element.slug}')" class="btn btn-primary">See Details</button>
                 </div>
             </div>
             `;
@@ -103,7 +101,7 @@ const makeDescription = data => {
         <div>
             <img src="${info.image}" alt="image of a phone">
             <h2>${info.name}</h2>
-            <p>${info.releaseDate ? info.releaseDate : ""}</p>
+            <p>${info.releaseDate ? info.releaseDate : "no release date found"}</p>
             <ul id="mainfeatures" class ="list-unstyled"><h3>main features</h3>
 
             </ul>
