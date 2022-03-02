@@ -1,3 +1,4 @@
+// ************** common utilities *************
 // spinner toggle button to show and off
 const spinner = document.getElementById("spinner");
 const spinnerOn = () => {spinner.style.setProperty("display", "block");};
@@ -10,10 +11,14 @@ const mainSection =document.getElementById('main-body');
 const mainPresent =() => {mainSection.style.display = "block";} 
 const mainAbsent =() => {mainSection.style.display = "none";} 
 
-// function to show while searching and search done 
+// function to show while searching and on search-done 
 const searchOn = () => {mainAbsent(); spinnerOn();}
 const searchFinished = () => {mainPresent(); spinnerOff();}
 
+// description section 
+const descriptionSection = document.getElementById("description");
+
+// ********* searching and showing all the products starts form here ********* 
 
 // searchbox and getting the values on click
 let searchValue = null;
@@ -22,6 +27,7 @@ const searchButton = document.getElementById("search-button");
 searchButton.addEventListener('click', function(){
     // function to start spinner and hide display 
     searchOn();
+    descriptionSection.textContent ='';
     const searchField = document.getElementById("search-field");
 
     searchValue = searchField.value;
@@ -36,13 +42,22 @@ const fetchOnSearch = phoneName => {
     fetch(phoneUrl).then( url => url.json()).then(data => displayData(data));
 }
 
-const displayData = data => {
  // all phones from search in the all phone variable in array format 
+const displayData = data => {
     const allPhone = data.data;
+
+    // ***** if the product not found ******
+    if(!data.status){
+        mainSection.innerHTML = `
+            <h3 class=" mt-5 text-center"> <span class ="text-danger" >!!!!! <span>no phone found </h3>
+            <img src="images/notFound.jpg" alt="image of info not found" class="w-50 mx-auto d-block">
+        `;
+        searchFinished();
+        return;
+    };
 
     const cardsSection = document.getElementById('cards');
     cardsSection.textContent = '';
-
 
     // showing the data in ui 
     allPhone.forEach(element => {
@@ -75,8 +90,6 @@ const makeDescription = data => {
     // console.log(data.data.name);
     const info = data.data;
     const mainFeatures = data.data.mainFeatures;
-    const descriptionSection = document.getElementById("description");
-
     descriptionSection.innerHTML = `
         <div>
             <img src="${info.image}" alt="image of a phone">
