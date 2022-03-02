@@ -1,9 +1,29 @@
+// spinner toggle button to show and off
+const spinner = document.getElementById("spinner");
+const spinnerOn = () => {spinner.style.setProperty("display", "block");};
+const spinnerOff = () => {spinner.style.setProperty("display", "none", "important");};
+
+spinnerOff();
+
+// main body show and hide while searching 
+const mainSection =document.getElementById('main-body');
+const mainPresent =() => {mainSection.style.display = "block";} 
+const mainAbsent =() => {mainSection.style.display = "none";} 
+
+// function to show while searching and search done 
+const searchOn = () => {mainAbsent(); spinnerOn();}
+const searchFinished = () => {mainPresent(); spinnerOff();}
+
+
 // searchbox and getting the values on click
 let searchValue = null;
 const searchButton = document.getElementById("search-button");
 
 searchButton.addEventListener('click', function(){
+    // function to start spinner and hide display 
+    searchOn();
     const searchField = document.getElementById("search-field");
+
     searchValue = searchField.value;
     searchField.value = "";
     fetchOnSearch(searchValue);
@@ -23,6 +43,7 @@ const displayData = data => {
     const cardsSection = document.getElementById('cards');
     cardsSection.textContent = '';
 
+
     // showing the data in ui 
     allPhone.forEach(element => {
         const div = document.createElement('div');
@@ -40,6 +61,8 @@ const displayData = data => {
         cardsSection.appendChild(div);
     });
 
+        // function to stop spinner and display result 
+        searchFinished();
 }
 
 // phone detail search and manage data in the ui *******

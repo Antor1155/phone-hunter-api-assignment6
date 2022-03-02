@@ -14,14 +14,22 @@
 </head>
 <body>
     <header class="text-center mt-3 mb-3" >
-        <h1 >Phone Palace</h1>
+        <h1 >Phone <span class="text-danger"> Palace</span> </h1>
         <!-- search section  -->
         <section class="mt-3">
             <input type="text" id="search-field" placeholder="please search your phone"> <button id="search-button">Search</button>
         </section>
     </header>
 
-    <main>
+    <!-- spinner section to show while loading  -->
+    <!-- style="display: none !important;"  -->
+    <section class="d-flex justify-content-center" id="spinner"  >
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">#</span>
+        </div>
+    </section> 
+
+    <main id="main-body">
         <!-- description section of the searched phone when click the search result  -->
         <section id="description" class="text-center">
             <!-- description of the item  -->
